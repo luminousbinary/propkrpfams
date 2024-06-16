@@ -1,3 +1,5 @@
+
+
 /*--------------------------------------------------------------------- File Name: responsive.css ---------------------------------------------------------------------*/
 
 
@@ -114,7 +116,7 @@ h4 a,
 h5 a,
 h6 a {
      color: #212121;
-     text-decoration: none !important;
+     text-decoration: none!important;
      opacity: 1
 }
 
@@ -159,7 +161,7 @@ img {
      height: auto;
 }
 
-:focus {
+ :focus {
      outline: 0;
 }
 
@@ -573,10 +575,6 @@ button {
      background: #190707;
 }
 
-/* abina... 
-
-intenational training program.  */
-
 
 /** end works section **/
 
@@ -760,3 +758,4 @@ intenational training program.  */
 
 
 /** end footer **/
+
