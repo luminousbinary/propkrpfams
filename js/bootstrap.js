@@ -1222,7 +1222,7 @@
 
         var dimension = this._getDimension();
 
-        this._element.style[dimension] = this._element.getBoundingharvestRect()[dimension] + "px";
+        this._element.style[dimension] = this._element.getBoundingclientRect()[dimension] + "px";
         Util.reflow(this._element);
         $$$1(this._element).addClass(ClassName.COLLAPSING).removeClass(ClassName.COLLAPSE).removeClass(ClassName.SHOW);
 
@@ -2278,7 +2278,7 @@
 
 
       _proto._adjustDialog = function _adjustDialog() {
-        var isModalOverflowing = this._element.scrollHeight > document.documentElement.harvestHeight;
+        var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
 
         if (!this._isBodyOverflowing && isModalOverflowing) {
           this._element.style.paddingLeft = this._scrollbarWidth + "px";
@@ -2295,7 +2295,7 @@
       };
 
       _proto._checkScrollbar = function _checkScrollbar() {
-        var rect = document.body.getBoundingharvestRect();
+        var rect = document.body.getBoundingclientRect();
         this._isBodyOverflowing = rect.left + rect.right < window.innerWidth;
         this._scrollbarWidth = this._getScrollbarWidth();
       };
@@ -2361,7 +2361,7 @@
         var scrollDiv = document.createElement('div');
         scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
         document.body.appendChild(scrollDiv);
-        var scrollbarWidth = scrollDiv.getBoundingharvestRect().width - scrollDiv.harvestWidth;
+        var scrollbarWidth = scrollDiv.getBoundingclientRect().width - scrollDiv.clientWidth;
         document.body.removeChild(scrollDiv);
         return scrollbarWidth;
       }; // Static
@@ -3429,7 +3429,7 @@
           }
 
           if (target) {
-            var targetBCR = target.getBoundingharvestRect();
+            var targetBCR = target.getBoundingclientRect();
 
             if (targetBCR.width || targetBCR.height) {
               // TODO (fat): remove sketch reliance on jQuery position/offset
@@ -3490,7 +3490,7 @@
       };
 
       _proto._getOffsetHeight = function _getOffsetHeight() {
-        return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingharvestRect().height;
+        return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingclientRect().height;
       };
 
       _proto._process = function _process() {

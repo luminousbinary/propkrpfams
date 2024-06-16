@@ -581,9 +581,9 @@ intenational training program.  */
 /** end works section **/
 
 
-/** harvests section **/
+/** clients section **/
 
-.harvests {
+.clients {
      padding: 90px 0 141px 0;
      background: #275a36;
 }
@@ -594,21 +594,21 @@ intenational training program.  */
      width: 100%;
 }
 
-.harvests .titlepage {
+.clients .titlepage {
      padding-bottom: 20px;
      text-align: left;
 }
 
-.harvests .titlepage h2 {
+.clients .titlepage h2 {
      color: #fff;
 }
 
-.harvests_Carousel .carousel-caption {
+.clients_Carousel .carousel-caption {
      position: inherit;
      padding: 0;
 }
 
-.harvests_box {
+.clients_box {
      text-align: center;
 }
 
@@ -617,7 +617,7 @@ intenational training program.  */
      background: #fff;
 }
 
-.harvests_Carousel .test_box h4 {
+.clients_Carousel .test_box h4 {
      font-size: 20px;
      color: #eda911;
      line-height: 18px;
@@ -627,15 +627,15 @@ intenational training program.  */
      padding: 80px 0 0 0;
 }
 
-.harvests_Carousel .imga figure {
+.clients_Carousel .imga figure {
      margin: 0;
 }
 
-.harvests_Carousel .imga figure img {
+.clients_Carousel .imga figure img {
      margin-bottom: -80px;
 }
 
-.harvests_Carousel .test_box p {
+.clients_Carousel .test_box p {
      font-size: 17px;
      line-height: 28px;
      color: #3c3c3d;
@@ -643,18 +643,18 @@ intenational training program.  */
      padding-bottom: 30px;
 }
 
-.harvests_Carousel .carousel-indicators {
+.clients_Carousel .carousel-indicators {
      bottom: -50px;
 }
 
-.harvests_Carousel .carousel-indicators li {
+.clients_Carousel .carousel-indicators li {
      width: 20px;
      height: 20px;
      background: #eda911;
      border-radius: 10px;
 }
 
-.harvests_Carousel .carousel-indicators li.active {
+.clients_Carousel .carousel-indicators li.active {
      background: #fffefe;
 }
 
@@ -663,20 +663,20 @@ intenational training program.  */
      display: none;
 }
 
-.harvests_imgfood {
+.clients_imgfood {
      padding-right: 40px;
 }
 
-.harvests_imgfood figure {
+.clients_imgfood figure {
      margin: 0;
 }
 
-.harvests_imgfood figure img {
+.clients_imgfood figure img {
      width: 100%;
 }
 
 
-/** end harvests section **/
+/** end clients section **/
 
 
 /** footer **/

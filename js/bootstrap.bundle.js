@@ -1221,7 +1221,7 @@
 
         var dimension = this._getDimension();
 
-        this._element.style[dimension] = this._element.getBoundingharvestRect()[dimension] + "px";
+        this._element.style[dimension] = this._element.getBoundingclientRect()[dimension] + "px";
         Util.reflow(this._element);
         $$$1(this._element).addClass(ClassName.COLLAPSING).removeClass(ClassName.COLLAPSE).removeClass(ClassName.SHOW);
 
@@ -1751,7 +1751,7 @@
   }
 
   function getSize(axis, body, html, computedStyle) {
-    return Math.max(body['offset' + axis], body['scroll' + axis], html['harvest' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+    return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
   }
 
   function getWindowSizes() {
@@ -1823,13 +1823,13 @@
   };
 
   /**
-   * Given element offsets, generate an output similar to getBoundingharvestRect
+   * Given element offsets, generate an output similar to getBoundingclientRect
    * @method
    * @memberof Popper.Utils
    * @argument {Object} offsets
-   * @returns {Object} harvestRect like output
+   * @returns {Object} clientRect like output
    */
-  function getharvestRect(offsets) {
+  function getclientRect(offsets) {
     return _extends({}, offsets, {
       right: offsets.left + offsets.width,
       bottom: offsets.top + offsets.height
@@ -1837,13 +1837,13 @@
   }
 
   /**
-   * Get bounding harvest rect of given element
+   * Get bounding client rect of given element
    * @method
    * @memberof Popper.Utils
    * @param {HTMLElement} element
-   * @return {Object} harvest rect
+   * @return {Object} client rect
    */
-  function getBoundingharvestRect(element) {
+  function getBoundingclientRect(element) {
     var rect = {};
 
     // IE10 10 FIX: Please, don't ask, the element isn't
@@ -1851,7 +1851,7 @@
     // This isn't reproducible in IE10 compatibility mode of IE11
     try {
       if (isIE(10)) {
-        rect = element.getBoundingharvestRect();
+        rect = element.getBoundingclientRect();
         var scrollTop = getScroll(element, 'top');
         var scrollLeft = getScroll(element, 'left');
         rect.top += scrollTop;
@@ -1859,7 +1859,7 @@
         rect.bottom += scrollTop;
         rect.right += scrollLeft;
       } else {
-        rect = element.getBoundingharvestRect();
+        rect = element.getBoundingclientRect();
       }
     } catch (e) {}
 
@@ -1872,8 +1872,8 @@
 
     // subtract scrollbar size from sizes
     var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
-    var width = sizes.width || element.harvestWidth || result.right - result.left;
-    var height = sizes.height || element.harvestHeight || result.bottom - result.top;
+    var width = sizes.width || element.clientWidth || result.right - result.left;
+    var height = sizes.height || element.clientHeight || result.bottom - result.top;
 
     var horizScrollbar = element.offsetWidth - width;
     var vertScrollbar = element.offsetHeight - height;
@@ -1889,7 +1889,7 @@
       result.height -= vertScrollbar;
     }
 
-    return getharvestRect(result);
+    return getclientRect(result);
   }
 
   function getOffsetRectRelativeToArbitraryNode(children, parent) {
@@ -1897,8 +1897,8 @@
 
     var isIE10 = isIE(10);
     var isHTML = parent.nodeName === 'HTML';
-    var childrenRect = getBoundingharvestRect(children);
-    var parentRect = getBoundingharvestRect(parent);
+    var childrenRect = getBoundingclientRect(children);
+    var parentRect = getBoundingclientRect(parent);
     var scrollParent = getScrollParent(children);
 
     var styles = getStyleComputedProperty(parent);
@@ -1910,7 +1910,7 @@
       parentRect.top = Math.max(parentRect.top, 0);
       parentRect.left = Math.max(parentRect.left, 0);
     }
-    var offsets = getharvestRect({
+    var offsets = getclientRect({
       top: childrenRect.top - parentRect.top - borderTopWidth,
       left: childrenRect.left - parentRect.left - borderLeftWidth,
       width: childrenRect.width,
@@ -1949,8 +1949,8 @@
 
     var html = element.ownerDocument.documentElement;
     var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
-    var width = Math.max(html.harvestWidth, window.innerWidth || 0);
-    var height = Math.max(html.harvestHeight, window.innerHeight || 0);
+    var width = Math.max(html.clientWidth, window.innerWidth || 0);
+    var height = Math.max(html.clientHeight, window.innerHeight || 0);
 
     var scrollTop = !excludeScroll ? getScroll(html) : 0;
     var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;
@@ -1962,7 +1962,7 @@
       height: height
     };
 
-    return getharvestRect(offset);
+    return getclientRect(offset);
   }
 
   /**
@@ -2124,7 +2124,7 @@
     var filteredAreas = sortedAreas.filter(function (_ref2) {
       var width = _ref2.width,
           height = _ref2.height;
-      return width >= popper.harvestWidth && height >= popper.harvestHeight;
+      return width >= popper.clientWidth && height >= popper.clientHeight;
     });
 
     var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
@@ -2285,11 +2285,11 @@
       }
       var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation
       if (modifier.enabled && isFunction(fn)) {
-        // Add properties to offsets to make them a complete harvestRect object
+        // Add properties to offsets to make them a complete clientRect object
         // we do this before each modifier to make sure the previous one doesn't
         // mess with these values
-        data.offsets.popper = getharvestRect(data.offsets.popper);
-        data.offsets.reference = getharvestRect(data.offsets.reference);
+        data.offsets.popper = getclientRect(data.offsets.popper);
+        data.offsets.reference = getclientRect(data.offsets.reference);
 
         data = fn(data, modifier);
       }
@@ -2633,7 +2633,7 @@
     var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
 
     var offsetParent = getOffsetParent(data.instance.popper);
-    var offsetParentRect = getBoundingharvestRect(offsetParent);
+    var offsetParentRect = getBoundingclientRect(offsetParent);
 
     // Styles
     var styles = {
@@ -2793,7 +2793,7 @@
     if (reference[side] + arrowElementSize > popper[opSide]) {
       data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
     }
-    data.offsets.popper = getharvestRect(data.offsets.popper);
+    data.offsets.popper = getclientRect(data.offsets.popper);
 
     // compute center of the popper
     var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
@@ -3044,15 +3044,15 @@
           element = referenceOffsets;
       }
 
-      var rect = getharvestRect(element);
+      var rect = getclientRect(element);
       return rect[measurement] / 100 * value;
     } else if (unit === 'vh' || unit === 'vw') {
       // if is a vh or vw, we calculate the size based on the viewport
       var size = void 0;
       if (unit === 'vh') {
-        size = Math.max(document.documentElement.harvestHeight, window.innerHeight || 0);
+        size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
       } else {
-        size = Math.max(document.documentElement.harvestWidth, window.innerWidth || 0);
+        size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
       }
       return size / 100 * value;
     } else {
@@ -3326,7 +3326,7 @@
     popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
 
     data.placement = getOppositePlacement(placement);
-    data.offsets.popper = getharvestRect(popper);
+    data.offsets.popper = getclientRect(popper);
 
     return data;
   }
@@ -3894,11 +3894,11 @@
    *
    * NB: This feature isn't supported in Internet Explorer 10
    * @name referenceObject
-   * @property {Function} data.getBoundingharvestRect
-   * A function that returns a set of coordinates compatible with the native `getBoundingharvestRect` method.
-   * @property {number} data.harvestWidth
+   * @property {Function} data.getBoundingclientRect
+   * A function that returns a set of coordinates compatible with the native `getBoundingclientRect` method.
+   * @property {number} data.clientWidth
    * An ES6 getter that will return the width of the virtual reference element.
-   * @property {number} data.harvestHeight
+   * @property {number} data.clientHeight
    * An ES6 getter that will return the height of the virtual reference element.
    */
 
@@ -4786,7 +4786,7 @@
 
 
       _proto._adjustDialog = function _adjustDialog() {
-        var isModalOverflowing = this._element.scrollHeight > document.documentElement.harvestHeight;
+        var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
 
         if (!this._isBodyOverflowing && isModalOverflowing) {
           this._element.style.paddingLeft = this._scrollbarWidth + "px";
@@ -4803,7 +4803,7 @@
       };
 
       _proto._checkScrollbar = function _checkScrollbar() {
-        var rect = document.body.getBoundingharvestRect();
+        var rect = document.body.getBoundingclientRect();
         this._isBodyOverflowing = rect.left + rect.right < window.innerWidth;
         this._scrollbarWidth = this._getScrollbarWidth();
       };
@@ -4869,7 +4869,7 @@
         var scrollDiv = document.createElement('div');
         scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
         document.body.appendChild(scrollDiv);
-        var scrollbarWidth = scrollDiv.getBoundingharvestRect().width - scrollDiv.harvestWidth;
+        var scrollbarWidth = scrollDiv.getBoundingclientRect().width - scrollDiv.clientWidth;
         document.body.removeChild(scrollDiv);
         return scrollbarWidth;
       }; // Static
@@ -5937,7 +5937,7 @@
           }
 
           if (target) {
-            var targetBCR = target.getBoundingharvestRect();
+            var targetBCR = target.getBoundingclientRect();
 
             if (targetBCR.width || targetBCR.height) {
               // TODO (fat): remove sketch reliance on jQuery position/offset
@@ -5998,7 +5998,7 @@
       };
 
       _proto._getOffsetHeight = function _getOffsetHeight() {
-        return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingharvestRect().height;
+        return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingclientRect().height;
       };
 
       _proto._process = function _process() {
