@@ -1,0 +1,241 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.logo img {
+    width: 150px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+button.donate {
+    background-color: #e63946;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    /* background-color: #ffffff; */
+    flex-direction: column;
+}
+
+
+/* image to side and back */
+
+
+.cnt2-sponsor-section {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    max-width: 1200px;
+    margin: none;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+}
+
+.cnt2-text-content {
+    max-width: 600px;
+}
+
+.cnt2-text-content h2 {
+    color: #1d7874;
+    margin-bottom: 20px;
+}
+
+.cnt2-text-content p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+button.cnt2-view-villages {
+    background-color: #7FB800;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cnt2-image-content img {
+    max-width: 70%;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cnt2-sponsor-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cnt2-text-content {
+        margin-bottom: 20px;
+    }
+
+    .cnt2-image-content img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+/*  seocndr with gradient backgroud overlay  */
+
+
+.not-hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    width:100%;
+    background-image: url('images/gallery-img3.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding-left:  70px ;
+    padding-top: 20px ;
+    padding-bottom: 20px ;
+    
+}
+
+.not-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+    z-index: 1;
+}
+.not-container{ 
+  
+    max-width: 1200px;
+}
+.not-content {
+    position: relative;
+    z-index: 2;
+    max-width: 60%;
+    color: white;
+    text-align: left;
+}
+
+.not-content h1 {
+    margin-bottom: 1.2rem;
+    font-size: 2.5em;
+}
+
+.not-content p {
+    margin-bottom: 1.2rem;
+    font-size: 1.2em;
+}
+
+.not-cta-button {
+    background-color: #7FB800;
+    color: white;
+    padding: 10px 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+@media (max-width: 768px) {
+    .not-content h1 {
+        font-size: 2em;
+    }
+
+    .not-content p {
+        font-size: 1em;
+    }
+
+    .not-cta-button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+}
+
+
+
+/* items */
+
+ /* Section styling */
+ .iteming {
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 30px 0;
+}
+
+.iteming div {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.iteming img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.iteming a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff4b4b;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.iteming a:hover {
+    background-color: #e04343;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .iteming {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .iteming {
+        grid-template-columns: 1fr;
+    }
+
+}
