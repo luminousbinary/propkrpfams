@@ -8,9 +8,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 150px;
     background-color: #ffffff;
 }
+/* header .inside{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+    max-width: 1200px;
+} */
 
 .logo img {
     width: 150px;
@@ -86,8 +93,8 @@ button.cnt2-view-villages {
 }
 
 .cnt2-image-content img {
-    max-width: 70%;
-    border-radius: 10px;
+    max-width: 80%;
+    border-radius: 100%;
 }
 
 /* Responsive Design */
